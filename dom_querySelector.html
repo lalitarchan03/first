@@ -31,12 +31,22 @@
   </div>
   <script>
     // querySelector task 
-    let secondItem = document.querySelector('li:nth-child(2)');
-    secondItem.style.backgroundColor = 'green';
+    // let secondItem = document.querySelector('li:nth-child(2)');
+    // secondItem.style.backgroundColor = 'green';
 
-    let thirdItem = document.querySelector('li:nth-child(3)');
-    thirdItem.style.display = 'none';
+    // let thirdItem = document.querySelector('li:nth-child(3)');
+    // thirdItem.style.display = 'none';
 
+    // querySelectorAll task 
+    let oddListItems = document.querySelectorAll('.list-group-item:nth-child(odd)');
+    // console.log(oddListItems);
+    for (let i = 0; i < oddListItems.length; i++) {
+        oddListItems[i].style.backgroundColor = 'green';
+    }
+
+    let listItems = document.querySelectorAll('li');
+    listItems[1].style.color = 'green';
+    
   </script>
 
 </body>
