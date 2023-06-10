@@ -19,13 +19,17 @@ function addItem(e){
 
     // get input value 
     let newItem = document.getElementById('item').value;
+    let newItem2 = document.getElementById('item2').value;
+
 
     // create new li element to add in list 
     let li = document.createElement('li');
     // add class 
     li.className = 'list-group-item';
     // add textnode to li with input value 
-    li.appendChild(document.createTextNode(newItem));
+    li.appendChild(document.createTextNode(newItem + ": "));
+    li.appendChild(document.createTextNode(newItem2));
+
 
     // creating delete button for new li 
     let delButton = document.createElement('button');
@@ -70,8 +74,12 @@ function filterItems(e) {
     let items = listItems.getElementsByTagName('li');
     // converting items(HTMLCollection) to an Array 
     Array.from(items).forEach(function (item){
-        let itemName = item.firstChild.textContent;
-        if (itemName.toLowerCase().indexOf(filterText) != -1) {
+        let itemName = item.childNodes;
+        
+        if (itemName[0].textContent.toLowerCase().indexOf(filterText) != -1) {
+            item.style.display = 'block';
+        }
+        else if (itemName[1].textContent.toLowerCase().indexOf(filterText) != -1) {
             item.style.display = 'block';
         }
         else {
