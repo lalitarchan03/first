@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title >JS For Beginners</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f2f2f2;
+      }
+
+      header {
+        padding: 20px;
+        text-align: center;
+      }
+
+      h1 {
+        color: black;
+        margin: 0;
+      }
+
+      .container {
+        border: 2px solid black;
+        background-color: #fff;
+        max-width: 300px;
+        margin: 20px auto;
+        padding: 20px;
+        text-align: center;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        text-align: left;
+        font-weight: bold;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      .btn {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .msg {
+        color: red;
+        margin-bottom: 10px;
+      }
+
+    </style>
+    
+  </head>
+  <body>
+    <header>
+      <h1 >JS For Beginners</h1>
+    </header>
+
+    <section class="container" >
+      <form id="my-form">
+        <h1>Add User</h1>
+        <div class="msg"></div>
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" placeholder="Enter name">
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="text" id="email" placeholder="Enter email">
+        </div>
+        <input class="btn" type="submit" value="Submit">
+      </form>
+
+    
+    <script>
+    // const form = document.querySelector('#my-form');
+    const nInput = document.querySelector('#name');
+    const eInput = document.querySelector('#email');
+    const msg = document.querySelector('.msg');
+    const btn = document.querySelector('.btn');
+    // const container = document.querySelector('.container');
+
+    btn.addEventListener('mouseover', (e) => {
+        e.preventDefault();
+        if(nInput.value === '' || eInput.value === '') {
+          btn.style.color = 'blue';
+          msg.style.color = 'red';
+          msg.innerHTML = 'Please fill all the fields!';
+          setTimeout(() => msg.innerHTML = '', 3000);
+          setTimeout(() => btn.style.color = 'black', 3000);
+        }
+    })
+
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if(nInput.value === '' || eInput.value === '') {
+          alert('Please fill all the fields!');
+        }
+        else{
+          localStorage.setItem( nInput.value,eInput.value);
+          console.log('name: ',nInput.value, '\nemail: ', eInput.value);
+        }
+    })
+
+   
+    </script>
+  </body>
+</html>
