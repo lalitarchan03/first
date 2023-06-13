@@ -49,6 +49,7 @@ function addItem(e){
         li.appendChild(document.createTextNode("Name: " + nInput.value +  ','));
         li.appendChild(document.createTextNode("\tEmail: " + eInput.value + ','));
         li.appendChild(document.createTextNode("\tPhone Number: " + pInput.value));
+        // console.log(li);
 
         // creating delete button for new li 
         let delButton = document.createElement('button');
@@ -72,7 +73,15 @@ function removeItem(e) {
     if (e.target.classList.contains('delete')) {
         if (confirm("Are you sure?")) {
             let liToDelete = e.target.parentElement;
+            // console.log(liToDelete);
             listItems.removeChild(liToDelete);
+        
+            let email = liToDelete.childNodes[1].textContent.split(':')[1];
+            let key = email.slice(1 , email.length-1)
+            console.log(key);
+            localStorage.removeItem(key);
+           
+           
         }
     }
 }
