@@ -18,6 +18,13 @@ btn.addEventListener('mouseover', (e) => {
 const form = document.getElementById('my-form');
 form.addEventListener('submit', addItem);
 
+function addUserDetailsOnScreen(curUserDetails) {
+    const parentList = document.getElementById('items');
+    const newListItem = document.createElement('li');
+    newListItem.appendChild(document.createTextNode('Name: ' + curUserDetails.name + ', ' + 'Email: ' + curUserDetails.email + ', ' + 'Phone Number: ' + curUserDetails.phonenumber))
+    parentList.appendChild(newListItem)
+}
+
 function addItem(e) {
     e.preventDefault();
     const name = e.target.userName.value;
@@ -29,19 +36,16 @@ function addItem(e) {
         email,
         phonenumber
     };
-    const userDetailsSerialized = JSON.stringify(userDetails);
-    // adding data to local storage 
-    // localStorage.setItem(email,userDetailsSerialized);
 
     // adding data to server/cloud/crudcrud using axios 
-    axios.post("https://crudcrud.com/api/e5239864fa96446397fe630c54479f36/appointmentDetails", userDetails)
-    .then((res) => {
-        const parentList = document.getElementById('items');
-        const newListItem = document.createElement('li');
-        newListItem.appendChild(document.createTextNode('Name: ' + name + ', ' + 'Email: ' + email + ', ' + 'Phone Number: ' + phonenumber))
-        parentList.appendChild(newListItem)
-    })
-    .catch((err) => console.error(err))
+    axios.post("https://crudcrud.com/api/deb47ed1efc6491e804106b4279f3207/appointmentDetails", userDetails)
+        .then((res) => {
+            // console.log(res.data)
+            addUserDetailsOnScreen(res.data)
+        })
+        .catch((err) => {
+            console.error(err)
+        })
 
     // showing data on screen 
     // const parentList = document.getElementById('items');
@@ -73,3 +77,15 @@ function addItem(e) {
     // newListItem.appendChild(editbtn);
     // parentList.appendChild(newListItem);
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+    axios.get("https://crudcrud.com/api/deb47ed1efc6491e804106b4279f3207/appointmentDetails")
+        .then((res) => {
+            for (let i=0; i < res.data.length; i++) {
+                addUserDetailsOnScreen(res.data[i])
+            }
+        })
+        .catch((err) => {
+            console.error(err)
+        })
+})
