@@ -23,6 +23,24 @@ function addUserDetailsOnScreen(curUserDetails) {
     const newListItem = document.createElement('li');
     newListItem.appendChild(document.createTextNode('Name: ' + curUserDetails.name + ', ' + 'Email: ' + curUserDetails.email + ', ' + 'Phone Number: ' + curUserDetails.phonenumber))
     parentList.appendChild(newListItem)
+
+    delete button 
+    const delbtn = document.createElement('button');
+    delbtn.className = 'delete';
+    delbtn.innerText = 'X'
+    delbtn.onclick = () => {
+        // localStorage.removeItem(email);
+        let postIdToDelete = curUserDetails._id 
+        axios.delete(`https://crudcrud.com/api/deb47ed1efc6491e804106b4279f3207/appointmentDetails/${postIdToDelete}`)
+            .then(res => {
+                console.log(`Deleted post with ID ${postIdToDelete}`);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+        parentList.removeChild(newListItem);
+    }
+    newListItem.appendChild(delbtn);
 }
 
 function addItem(e) {
